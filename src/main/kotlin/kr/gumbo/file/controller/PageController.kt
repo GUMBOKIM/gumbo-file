@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HomeController {
+public class PageController {
 
     @Autowired
     lateinit var fileService: FileService;
@@ -23,5 +23,10 @@ public class HomeController {
     @GetMapping("/test")
     fun testController(@RequestBody createFileDto: CreateFileDto): ResponseEntity<MutableList<File>> {
         return ResponseEntity.ok(fileService.createFile(createFileDto));
+    }
+
+    @GetMapping("/test2")
+    fun testController(@RequestBody fileId: Long): ResponseEntity<MutableList<File>> {
+        return ResponseEntity.ok(fileService.updateFile(fileId));
     }
 }

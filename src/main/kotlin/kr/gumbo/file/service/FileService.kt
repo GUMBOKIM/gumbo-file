@@ -16,4 +16,11 @@ class FileService {
         fileRepository.save(File(createFileDto));
         return fileRepository.findAll();
     }
+
+    fun updateFile(fileId: Long): MutableList<File> {
+        val file = fileRepository.findById(fileId).get();
+        file.deleteFile();
+        fileRepository.save(file);
+        return fileRepository.findAll();
+    }
 }
