@@ -1,9 +1,9 @@
 package kr.gumbo.file.dto
 
 data class CreateFileDto(
-    val domain: String,
     val originFileName: String,
-    val saveFileName: String,
+    val fileSize: Long,
     val fileExtension: String,
+    val saveFileName: String,
     val fileLocation: String
 )

@@ -1,10 +1,9 @@
 package kr.gumbo.file.service
 
-import kr.gumbo.file.dto.CreateFileDto
-import kr.gumbo.file.entity.File
 import kr.gumbo.file.repository.FileRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 
 @Service
 class FileService {
@@ -12,15 +11,22 @@ class FileService {
     @Autowired
     private lateinit var fileRepository: FileRepository;
 
-    fun createFile(createFileDto: CreateFileDto): MutableList<File> {
-        fileRepository.save(File(createFileDto));
-        return fileRepository.findAll();
+    val filePath = "D:\\file\\";
+
+    fun uploadFile(domain: String, userId: Long, file: MultipartFile) {
+        val contentType = file.contentType;
+        println("fileRepository = ${fileRepository}");
     }
 
-    fun updateFile(fileId: Long): MutableList<File> {
-        val file = fileRepository.findById(fileId).get();
-        file.deleteFile();
-        fileRepository.save(file);
-        return fileRepository.findAll();
+//    fun createFile(file: MultipartFile): File {
+//        println("file = ${file}")
+//        val createFileDto = CreateFileDto();
+//
+//        return
+//    }
+
+    fun uploadFile(file: MultipartFile){
+        println("file = ${file}")
     }
+
 }

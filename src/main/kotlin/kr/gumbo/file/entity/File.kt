@@ -11,36 +11,35 @@ import javax.persistence.Id
 
 @Entity
 @Where(clause = "isDeleted = false")
-@SQLDelete(sql = "UPDATE file SET isDeleted=1 WHERE id = ?")
-class File(
-    createFileDto: CreateFileDto
-) : BaseTimeEntity() {
+class File(createFileDto: CreateFileDto) : BaseTimeEntity() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
     @Column(nullable = false)
-    open var domain: String = createFileDto.domain;
+    var originFileName: String = createFileDto.originFileName;
+
+    @Column(nullable = false)
+    var fileSize: Long = createFileDto.fileSize;
+
+    @Column(nullable = false)
+    var fileExtension: String = createFileDto.fileExtension;
 
     @Column(nullable = false)
     var fileLocation: String = createFileDto.fileLocation;
 
     @Column(nullable = false)
-    var originFileName: String = createFileDto.originFileName;
+    var saveFileName: String = createFileDto.saveFileName;
 
     var isDeleted: Boolean = false;
 
-    @Column(nullable = false)
-    var saveFileName: String = createFileDto.saveFileName;
+    var createdUserId: Long? = null;
 
-    @Column(nullable = false)
-    var fileExtension: String = createFileDto.fileExtension;
+    var deletedUserId: Long? = null;
 
-//    var createdUser: Long? = null;
-//    var updatedUser: Long? = null;
-
-    fun deleteFile() {
+    fun deleteFile(userId: Long?) {
         this.isDeleted = true
+        this.deletedUserId = userId;
     }
 }

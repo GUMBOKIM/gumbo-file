@@ -15,5 +15,5 @@ class BaseTimeEntity(
     @Column(updatable = false)
     var createdDate: LocalDateTime = LocalDateTime.MIN,
     @LastModifiedDate
-    var updateAt: LocalDateTime = LocalDateTime.MIN
+    var updateDate: LocalDateTime = LocalDateTime.MIN
 )
